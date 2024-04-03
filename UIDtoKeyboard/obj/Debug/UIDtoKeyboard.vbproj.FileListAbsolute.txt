@@ -1,0 +1,17 @@
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\bin\Debug\UIDtoKeyboard.exe.config
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\bin\Debug\UIDtoKeyboard.exe
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\bin\Debug\UIDtoKeyboard.pdb
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\bin\Debug\UIDtoKeyboard.xml
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\bin\Debug\PCSC.dll
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\bin\Debug\PCSC.Iso7816.dll
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\bin\Debug\PCSC.xml
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\bin\Debug\PCSC.Iso7816.xml
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.vbproj.AssemblyReference.cache
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.frmMain.resources
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.Resources.resources
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.vbproj.GenerateResource.cache
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.vbproj.CoreCompileInputs.cache
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.vbproj.CopyComplete
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.exe
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.xml
+C:\Users\administrator\Documents\ConnectWiseControl\Files\UIDtoKeyboard-master\UIDtoKeyboard\obj\Debug\UIDtoKeyboard.pdb

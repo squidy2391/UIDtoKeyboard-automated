@@ -59,7 +59,60 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim iniFilePath As String = System.IO.Path.Combine(Application.StartupPath, "readingmode.ini")
+
+        ' Load the readers
         loadReaderList()
+
+        ' Checking if ini-file exist. If not, create an empty file.
+        If Not System.IO.File.Exists(iniFilePath) Then
+            ' Als het niet bestaat, maak het dan leeg aan
+            System.IO.File.WriteAllText(iniFilePath, "")
+        End If
+
+        ' Fill in the location of the ini-file
+        txtLocationIniFile.Text = iniFilePath
+
+        ' Load Readingmode from ini-file, if exist fill it into the right textfield
+        If System.IO.File.Exists(iniFilePath) Then
+            Dim iniContents As String() = System.IO.File.ReadAllLines(iniFilePath)
+            For Each line As String In iniContents
+                If line.StartsWith("ReadingMode=") Then
+                    Dim value As String = line.Split("="c)(1).Trim()
+                    If IsNumeric(value) AndAlso CInt(value) >= 1 AndAlso CInt(value) <= 6 Then
+                        txtReadingMode.Text = value
+                        Exit For
+                    End If
+                End If
+            Next
+        End If
+
+        ' Load Automatic from ini-file, if exist check the checkbox...but only when there is a value in Reading Mode.
+        If txtReadingMode.Text <> "" Then
+            If System.IO.File.Exists(iniFilePath) Then
+                Dim iniContents As String() = System.IO.File.ReadAllLines(iniFilePath)
+                For Each line As String In iniContents
+                    If line.StartsWith("Automatic=") Then
+                        Dim automateValue As String = line.Split("="c)(1).Trim().ToLower()
+                        If automateValue = "yes" Then
+                            chkAutomate.Checked = True
+                        Else
+                            chkAutomate.Checked = False
+                        End If
+                        Exit For
+                    End If
+                Next
+            End If
+        Else
+            chkAutomate.Checked = False
+            chkAutomate.Enabled = False
+        End If
+
+        ' Checking if chkAutomate is checked, if so...start the monitor
+        If chkAutomate.Checked Then
+            btnStartMonitor_Click(Nothing, EventArgs.Empty)
+        End If
+
     End Sub
 
     Private Sub btnRefreshReader_Click(sender As Object, e As EventArgs) Handles btnRefreshReader.Click
@@ -67,15 +120,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnStartMonitor_Click(sender As Object, e As EventArgs) Handles btnStartMonitor.Click
-        If txtReadingMode.Text <> 1 AndAlso txtReadingMode.Text <> 2 AndAlso txtReadingMode.Text <> 3 AndAlso txtReadingMode.Text <> 4 AndAlso txtReadingMode.Text <> 5 AndAlso txtReadingMode.Text <> 6 Then
-            MessageBox.Show("Error: Reading mode not match the preset.")
-        Else
-            If isstart = True Then
-                monitor.Cancel()
-            End If
-            startMonitor()
-            isstart = True
+        If isstart = True Then
+            monitor.Cancel()
         End If
+        startMonitor()
+        isstart = True
     End Sub
 
     Private Sub btnStopMonitor_Click(sender As Object, e As EventArgs) Handles btnStopMonitor.Click
@@ -210,4 +259,82 @@ Public Class frmMain
         Return True
     End Function
 
+    Private Sub btnEmptyIniFile_Click(sender As Object, e As EventArgs) Handles btnEmptyIniFile.Click
+        Dim iniFilePath As String = System.IO.Path.Combine(Application.StartupPath, "readingmode.ini")
+        If System.IO.File.Exists(iniFilePath) Then
+            System.IO.File.WriteAllText(iniFilePath, "")
+            txtReadingMode.Clear()
+
+            MessageBox.Show("The value(s) has been cleared from the ini-file.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("There is no ini-file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub btnFillIniFile_Click(sender As Object, e As EventArgs) Handles btnFillIniFile.Click
+        Dim readingMode As Integer
+        Dim iniFilePath As String = System.IO.Path.Combine(Application.StartupPath, "readingmode.ini")
+
+        If Integer.TryParse(txtReadingMode.Text, readingMode) AndAlso readingMode >= 1 AndAlso readingMode <= 6 Then
+            ' Checking if chkAutomate is checked
+            Dim automateValue As String = If(chkAutomate.Checked, "yes", "no")
+
+            ' Deleting existing values of ReadingMode and Automatic
+            Dim iniContents As List(Of String) = New List(Of String)(System.IO.File.ReadAllLines(iniFilePath))
+            For i As Integer = 0 To iniContents.Count - 1
+                If iniContents(i).StartsWith("ReadingMode=") Then
+                    iniContents.RemoveAt(i)
+                    Exit For ' We found and removed the line, so exit the loop
+                End If
+            Next
+
+            For i As Integer = 0 To iniContents.Count - 1
+                If iniContents(i).StartsWith("Automatic=") Then
+                    iniContents.RemoveAt(i)
+                    Exit For ' We found and removed the line, so exit the loop
+                End If
+            Next
+
+            ' Adding values ReadingMode and Automatic
+            iniContents.Add("ReadingMode=" & readingMode.ToString())
+            If chkAutomate.Checked Then
+                If txtReadingMode.Text.Length <> 0 Then
+                    iniContents.Add("Automatic=" & automateValue)
+                Else
+                    chkAutomate.Checked = False
+                    chkAutomate.Enabled = False
+
+                    MessageBox.Show("Please first fill in the Reading Mode value in the textfield, otherwise it can not be automated.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+
+            End If
+
+            System.IO.File.WriteAllLines(iniFilePath, iniContents)
+            MessageBox.Show("The value(s) has been added to the ini-file.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("Invalid value for ReadingMode. Please fill in a value between 1 and 6.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
+    End Sub
+
+    Private Sub txtReadingMode_KeyDown(sender As Object, e As KeyEventArgs) Handles txtReadingMode.KeyDown
+        ' Only numbers 1 to 6, Backspace and Delete key are allowed
+        If Not (e.KeyCode >= Keys.D1 AndAlso e.KeyCode <= Keys.D6) AndAlso Not (e.KeyCode >= Keys.NumPad1 AndAlso e.KeyCode <= Keys.NumPad6) AndAlso e.KeyCode <> Keys.Back AndAlso e.KeyCode <> Keys.Delete Then
+            e.SuppressKeyPress = True
+        End If
+
+        ' Checking if textlength i more than 1, and allow Backup and Delete to clear the text
+        If txtReadingMode.Text.Length >= 1 AndAlso e.KeyCode <> Keys.Back AndAlso e.KeyCode <> Keys.Delete Then
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    Private Sub txtReadingMode_KeyUp(sender As Object, e As KeyEventArgs) Handles txtReadingMode.KeyUp
+        ' Checking if there is a value in txtReadingMode. If not, disable automatic on start checkbox
+        If txtReadingMode.Text = "" Then
+            chkAutomate.Checked = False
+            chkAutomate.Enabled = False
+        Else
+            chkAutomate.Enabled = True
+        End If
+    End Sub
 End Class

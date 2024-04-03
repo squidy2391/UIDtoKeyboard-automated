@@ -31,6 +31,12 @@ Partial Class frmMain
         Me.lblInst2 = New System.Windows.Forms.Label()
         Me.txtReadingMode = New System.Windows.Forms.TextBox()
         Me.lblReadingMode = New System.Windows.Forms.Label()
+        Me.btnEmptyIniFile = New System.Windows.Forms.Button()
+        Me.btnFillIniFile = New System.Windows.Forms.Button()
+        Me.chkAutomate = New System.Windows.Forms.CheckBox()
+        Me.txtLocationIniFile = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'cbxReaderList
@@ -120,11 +126,76 @@ Partial Class frmMain
         Me.lblReadingMode.TabIndex = 9
         Me.lblReadingMode.Text = "Reading Mode:"
         '
+        'btnEmptyIniFile
+        '
+        Me.btnEmptyIniFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnEmptyIniFile.Location = New System.Drawing.Point(554, 424)
+        Me.btnEmptyIniFile.Name = "btnEmptyIniFile"
+        Me.btnEmptyIniFile.Size = New System.Drawing.Size(231, 27)
+        Me.btnEmptyIniFile.TabIndex = 10
+        Me.btnEmptyIniFile.Text = "Empty ini-file"
+        Me.btnEmptyIniFile.UseVisualStyleBackColor = True
+        '
+        'btnFillIniFile
+        '
+        Me.btnFillIniFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.btnFillIniFile.Location = New System.Drawing.Point(554, 457)
+        Me.btnFillIniFile.Name = "btnFillIniFile"
+        Me.btnFillIniFile.Size = New System.Drawing.Size(231, 27)
+        Me.btnFillIniFile.TabIndex = 11
+        Me.btnFillIniFile.Text = "Write Reading Mode to ini-file"
+        Me.btnFillIniFile.UseVisualStyleBackColor = True
+        '
+        'chkAutomate
+        '
+        Me.chkAutomate.AutoSize = True
+        Me.chkAutomate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!)
+        Me.chkAutomate.Location = New System.Drawing.Point(554, 500)
+        Me.chkAutomate.Name = "chkAutomate"
+        Me.chkAutomate.Size = New System.Drawing.Size(144, 22)
+        Me.chkAutomate.TabIndex = 12
+        Me.chkAutomate.Text = "Automate on start"
+        Me.chkAutomate.UseVisualStyleBackColor = True
+        '
+        'txtLocationIniFile
+        '
+        Me.txtLocationIniFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtLocationIniFile.Location = New System.Drawing.Point(554, 528)
+        Me.txtLocationIniFile.Name = "txtLocationIniFile"
+        Me.txtLocationIniFile.Size = New System.Drawing.Size(244, 24)
+        Me.txtLocationIniFile.TabIndex = 13
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label1.Location = New System.Drawing.Point(438, 531)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(110, 18)
+        Me.Label1.TabIndex = 14
+        Me.Label1.Text = "Location ini-file:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.0!)
+        Me.Label2.Location = New System.Drawing.Point(549, 379)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(237, 30)
+        Me.Label2.TabIndex = 15
+        Me.Label2.Text = "Automation Options"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(810, 551)
+        Me.ClientSize = New System.Drawing.Size(810, 556)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtLocationIniFile)
+        Me.Controls.Add(Me.chkAutomate)
+        Me.Controls.Add(Me.btnFillIniFile)
+        Me.Controls.Add(Me.btnEmptyIniFile)
         Me.Controls.Add(Me.lblReadingMode)
         Me.Controls.Add(Me.txtReadingMode)
         Me.Controls.Add(Me.lblInst2)
@@ -150,4 +221,10 @@ Partial Class frmMain
     Friend WithEvents lblInst2 As Label
     Friend WithEvents txtReadingMode As TextBox
     Friend WithEvents lblReadingMode As Label
+    Friend WithEvents btnEmptyIniFile As Button
+    Friend WithEvents btnFillIniFile As Button
+    Friend WithEvents chkAutomate As CheckBox
+    Friend WithEvents txtLocationIniFile As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class
